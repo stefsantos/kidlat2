@@ -26,6 +26,8 @@ class MapPageState extends State<MapPage> {
   TextEditingController searchController = TextEditingController();
   List<ChargerMarker> searchResults = [];
 
+  int _selectedIndex = 0; // Track the selected index
+
   void getCurrentLocation() async {
     location.getLocation().then(
       (location) {
@@ -136,6 +138,25 @@ class MapPageState extends State<MapPage> {
     }
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (_selectedIndex == 2 && currentLocation != null) {
+        _controller.future.then((controller) {
+          controller.animateCamera(
+            CameraUpdate.newCameraPosition(
+              CameraPosition(
+                target: LatLng(currentLocation!.latitude!,
+                    currentLocation!.longitude!),
+                zoom: 14.5,
+              ),
+            ),
+          );
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +171,7 @@ class MapPageState extends State<MapPage> {
                     zoom: 14.5,
                   ),
                   myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
                   polylines: {
                     Polyline(
                       polylineId: const PolylineId("poly"),
@@ -214,7 +236,7 @@ class MapPageState extends State<MapPage> {
                             child: Container(
                               margin: const EdgeInsets.only(top: 10),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.black26,
                                 borderRadius: BorderRadius.circular(30),
                                 boxShadow: [
                                   BoxShadow(
@@ -251,6 +273,30 @@ class MapPageState extends State<MapPage> {
                 ),
               ],
             ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_walk),
+            label: 'Activity',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color.fromARGB(251, 216, 181, 7),
+        unselectedItemColor: Colors.black,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
