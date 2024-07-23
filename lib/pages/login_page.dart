@@ -33,6 +33,13 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true, 
         title: const Text('Login'),
+        leading: IconButton(
+          color: Colors.black,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/');
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
