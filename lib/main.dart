@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kidlat/pages/SignUpPages/SignUp.dart';
+import 'package:kidlat/pages/login_page.dart';
 import 'package:kidlat/pages/start_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -28,6 +30,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const StartPage(),
+      routes: {
+        'login': (context) => LoginPage(),
+        '/sign_up': (context) => SignUpPage(),
+      }
     );
   }
 }

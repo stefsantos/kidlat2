@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kidlat/pages/SignUpPages/SignUp.dart';
 import 'package:kidlat/pages/auth_page.dart';
 
 
@@ -85,7 +86,8 @@ class LoginPage extends StatelessWidget {
                     print("Proceed to Login Button tapped!");
                     signUserIn(context);  // Call signUserIn method
                 },
-                child: Text('Login',
+                child: Text(
+                  'Login',
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -117,35 +119,40 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 30),
               Row(
                 children: [
-                  SizedBox(
-                    width: 198,
-                    height: 21,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Don’t have an account? ',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontSize: 11,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                              height: 0.15,
-                              letterSpacing: -0.08,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/sign_up');
+                    },
+                    child: SizedBox(
+                      width: 198,
+                      height: 21,
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Don’t have an account? ',
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: 11,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 0.15,
+                                letterSpacing: -0.08,
+                              ),
                             ),
-                          ),
-                          TextSpan(
-                            text: 'Signup',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                              height: 0.15,
-                              letterSpacing: -0.08,
+                            TextSpan(
+                              text: 'Sign up here',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 11,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                                height: 0.15,
+                                letterSpacing: -0.08,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -177,32 +184,32 @@ class LoginPage extends StatelessWidget {
 }
 
 Widget _buildInputField(String hintText, TextEditingController controller, {bool obscureText = false}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 8),
-        TextField(
-          controller: controller,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: Colors.black.withOpacity(0.7),
-              fontSize: 17,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-              letterSpacing: -0.30,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Color(0xFFE1E1E1),
-                width: 2,
-              ),
-            ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(height: 8),
+      TextField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: Colors.black.withOpacity(0.7),
+            fontSize: 17,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w400,
+            letterSpacing: -0.30,
           ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: Color(0xFFE1E1E1),
+              width: 2,
+            ),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
