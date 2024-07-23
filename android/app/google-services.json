@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432251828592",
+    "project_id": "kidlat2",
+    "storage_bucket": "kidlat2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432251828592:android:c9c6c78647b1dfcdf537b5",
+        "android_client_info": {
+          "package_name": "com.example.google_mao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432251828592-imfr6r5mq7abvu73rm6uca73v14o67i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhPEwfrSGsVNSyWwU24vXswH8WIjEX_n4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432251828592-imfr6r5mq7abvu73rm6uca73v14o67i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kidlat/MapPage.dart';
+import 'package:kidlat/pages/login_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -85,7 +86,7 @@ class StartPage extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MapPage()));
+                                    builder: (context) => LoginPage()));
                           },
                           child: Text(
                             'Login',
