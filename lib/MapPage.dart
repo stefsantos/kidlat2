@@ -15,7 +15,8 @@ class MapPage extends StatefulWidget {
 class MapPageState extends State<MapPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng destination = LatLng(14.536189958708459, 120.98191704232873);
+  static const LatLng destination =
+      LatLng(14.536189958708459, 120.98191704232873);
 
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
@@ -91,7 +92,8 @@ class MapPageState extends State<MapPage> {
                 children: [
                   ListTile(
                     title: Text(charger.name),
-                    subtitle: Text('Location: ${charger.location.latitude}, ${charger.location.longitude}'),
+                    subtitle: Text(
+                        'Location: ${charger.location.latitude}, ${charger.location.longitude}'),
                   ),
                   const SizedBox(height: 10),
                   Image.network(
@@ -137,91 +139,116 @@ class MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Kidlat",
-          style: TextStyle(color: Colors.black, fontSize: 16),
-        ),
-      ),
       body: currentLocation == null
           ? const Center(child: CircularProgressIndicator())
-          : Column(
+          : Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: searchController,
-                    decoration: const InputDecoration(
-                      hintText: 'Search chargers',
-                      border: OutlineInputBorder(),
-                      suffixIcon: Icon(Icons.search),
-                    ),
-                    onChanged: (value) {
-                      searchMarkers(value);
-                    },
+                GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(currentLocation!.latitude!,
+                        currentLocation!.longitude!),
+                    zoom: 14.5,
                   ),
-                ),
-                if (searchResults.isNotEmpty)
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: searchResults.length,
-                      itemBuilder: (context, index) {
-                        ChargerMarker charger = searchResults[index];
-                        return ListTile(
-                          title: Text(charger.name),
-                          onTap: () {
-                            setState(() {
-                              selectedMarker = charger.location;
-                            });
-                            showBottomSheet(charger.location, charger);
-                          },
-                        );
-                      },
+                  myLocationEnabled: true,
+                  polylines: {
+                    Polyline(
+                      polylineId: const PolylineId("poly"),
+                      color: Colors.blue,
+                      points: polylineCoordinates,
+                      width: 5,
                     ),
-                  )
-                else
-                  Expanded(
-                    child: Stack(
+                  },
+                  markers: {
+                    Marker(
+                      markerId: const MarkerId("source"),
+                    ),
+                    ...markers.map((charger) {
+                      return Marker(
+                        markerId: MarkerId(charger.name),
+                        position: charger.location,
+                        onTap: () {
+                          setState(() {
+                            selectedMarker = charger.location;
+                          });
+                          showBottomSheet(charger.location, charger);
+                        },
+                      );
+                    }).toSet(),
+                  },
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       children: [
-                        GoogleMap(
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(currentLocation!.latitude!,
-                                currentLocation!.longitude!),
-                            zoom: 14.5,
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          myLocationEnabled: true,
-                          polylines: {
-                            Polyline(
-                              polylineId: const PolylineId("poly"),
-                              color: Colors.blue,
-                              points: polylineCoordinates,
-                              width: 5,
+                          child: TextField(
+                            controller: searchController,
+                            decoration: const InputDecoration(
+                              hintText: 'Search chargers',
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.all(16),
+                              suffixIcon: Icon(Icons.search),
                             ),
-                          },
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId("source"),
-                            ),
-                            ...markers.map((charger) {
-                              return Marker(
-                                markerId: MarkerId(charger.name),
-                                position: charger.location,
-                                onTap: () {
-                                  setState(() {
-                                    selectedMarker = charger.location;
-                                  });
-                                  showBottomSheet(charger.location, charger);
-                                },
-                              );
-                            }).toSet(),
-                          },
-                          onMapCreated: (GoogleMapController controller) {
-                            _controller.complete(controller);
-                          },
+                            onChanged: (value) {
+                              searchMarkers(value);
+                            },
+                          ),
                         ),
+                        if (searchResults.isNotEmpty)
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: searchResults.length,
+                                itemBuilder: (context, index) {
+                                  ChargerMarker charger = searchResults[index];
+                                  return ListTile(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 5),
+                                    title: Text(charger.name),
+                                    onTap: () {
+                                      setState(() {
+                                        selectedMarker = charger.location;
+                                      });
+                                      showBottomSheet(
+                                          charger.location, charger);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
+                ),
               ],
             ),
     );

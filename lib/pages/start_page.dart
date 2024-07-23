@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kidlat/MapPage.dart';
-import 'package:kidlat/pages/login_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -10,7 +9,6 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -22,19 +20,6 @@ class StartPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 73,
-                  height: 61,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage("https://via.placeholder.com/73x61"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
@@ -63,12 +48,16 @@ class StartPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0x4C000000),
+                      color: Color.fromARGB(0, 0, 0, 0),
                       blurRadius: 5,
                       offset: Offset(0, 4),
                       spreadRadius: 0,
                     )
                   ],
+                  image: DecorationImage(
+                    image: AssetImage('assets/Kidlat App Car.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -86,7 +75,7 @@ class StartPage extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const MapPage()));
                           },
                           child: Text(
                             'Login',
