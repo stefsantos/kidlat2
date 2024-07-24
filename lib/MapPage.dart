@@ -54,7 +54,7 @@ class MapPageState extends State<MapPage> {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyCAaL8ID7Ipzi5pzsNtT3eJC-gchL-F8i0",
+      "YOUR_GOOGLE_MAPS_API_KEY",
       PointLatLng(source.latitude, source.longitude),
       PointLatLng(destination.latitude, destination.longitude),
     );
@@ -141,138 +141,21 @@ class MapPageState extends State<MapPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 2 && currentLocation != null) {
-        _controller.future.then((controller) {
-          controller.animateCamera(
-            CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: LatLng(currentLocation!.latitude!,
-                    currentLocation!.longitude!),
-                zoom: 14.5,
-              ),
-            ),
-          );
-        });
-      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentLocation == null
-          ? const Center(child: CircularProgressIndicator())
-          : Stack(
-              children: [
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(currentLocation!.latitude!,
-                        currentLocation!.longitude!),
-                    zoom: 14.5,
-                  ),
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  polylines: {
-                    Polyline(
-                      polylineId: const PolylineId("poly"),
-                      color: Colors.blue,
-                      points: polylineCoordinates,
-                      width: 5,
-                    ),
-                  },
-                  markers: {
-                    Marker(
-                      markerId: const MarkerId("source"),
-                    ),
-                    ...markers.map((charger) {
-                      return Marker(
-                        markerId: MarkerId(charger.name),
-                        position: charger.location,
-                        onTap: () {
-                          setState(() {
-                            selectedMarker = charger.location;
-                          });
-                          showBottomSheet(charger.location, charger);
-                        },
-                      );
-                    }).toSet(),
-                  },
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                ),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 10,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: TextField(
-                            controller: searchController,
-                            decoration: const InputDecoration(
-                              hintText: 'Search chargers',
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(16),
-                              suffixIcon: Icon(Icons.search),
-                            ),
-                            onChanged: (value) {
-                              searchMarkers(value);
-                            },
-                          ),
-                        ),
-                        if (searchResults.isNotEmpty)
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.circular(30),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black26,
-                                    blurRadius: 10,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: searchResults.length,
-                                itemBuilder: (context, index) {
-                                  ChargerMarker charger = searchResults[index];
-                                  return ListTile(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 5),
-                                    title: Text(charger.name),
-                                    onTap: () {
-                                      setState(() {
-                                        selectedMarker = charger.location;
-                                      });
-                                      showBottomSheet(
-                                          charger.location, charger);
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          buildMapPage(),
+          ActivityPage(),
+          FavoritesPage(),
+          ProfilePage(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -297,6 +180,148 @@ class MapPageState extends State<MapPage> {
         unselectedItemColor: Colors.black,
         onTap: _onItemTapped,
       ),
+    );
+  }
+
+  Widget buildMapPage() {
+    return currentLocation == null
+        ? const Center(child: CircularProgressIndicator())
+        : Stack(
+            children: [
+              GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(currentLocation!.latitude!,
+                      currentLocation!.longitude!),
+                  zoom: 14.5,
+                ),
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
+                polylines: {
+                  Polyline(
+                    polylineId: const PolylineId("poly"),
+                    color: Colors.blue,
+                    points: polylineCoordinates,
+                    width: 5,
+                  ),
+                },
+                markers: {
+                  Marker(
+                    markerId: const MarkerId("source"),
+                  ),
+                  ...markers.map((charger) {
+                    return Marker(
+                      markerId: MarkerId(charger.name),
+                      position: charger.location,
+                      onTap: () {
+                        setState(() {
+                          selectedMarker = charger.location;
+                        });
+                        showBottomSheet(charger.location, charger);
+                      },
+                    );
+                  }).toSet(),
+                },
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              ),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: searchController,
+                          decoration: const InputDecoration(
+                            hintText: 'Search chargers',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(16),
+                            suffixIcon: Icon(Icons.search),
+                          ),
+                          onChanged: (value) {
+                            searchMarkers(value);
+                          },
+                        ),
+                      ),
+                      if (searchResults.isNotEmpty)
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.black26,
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: searchResults.length,
+                              itemBuilder: (context, index) {
+                                ChargerMarker charger = searchResults[index];
+                                return ListTile(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  title: Text(charger.name),
+                                  onTap: () {
+                                    setState(() {
+                                      selectedMarker = charger.location;
+                                    });
+                                    showBottomSheet(charger.location, charger);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+  }
+}
+
+class ActivityPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Activity Page"),
+    );
+  }
+}
+
+class FavoritesPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Favorites Page"),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Profile Page"),
     );
   }
 }
