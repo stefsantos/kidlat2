@@ -299,7 +299,12 @@ class MapPageState extends State<MapPage> {
   }
 }
 
-class ActivityPage extends StatelessWidget {
+class ActivityPage extends StatefulWidget {
+  @override
+  _ActivityPageState createState() => _ActivityPageState();
+}
+
+class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -308,7 +313,12 @@ class ActivityPage extends StatelessWidget {
   }
 }
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
+  @override
+  _FavoritesPageState createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -317,7 +327,12 @@ class FavoritesPage extends StatelessWidget {
   }
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
