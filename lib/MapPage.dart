@@ -4,7 +4,9 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'markers.dart'; // Import the markers file
-
+import 'pages/FavoritesPage.dart';
+import 'pages/ActivityPage.dart';
+import 'pages/ProfilePage.dart';
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
 
@@ -296,47 +298,5 @@ class MapPageState extends State<MapPage> {
               ),
             ],
           );
-  }
-}
-
-class ActivityPage extends StatefulWidget {
-  @override
-  _ActivityPageState createState() => _ActivityPageState();
-}
-
-class _ActivityPageState extends State<ActivityPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text("Activity Page"),
-    );
-  }
-}
-
-class FavoritesPage extends StatefulWidget {
-  @override
-  _FavoritesPageState createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text("Favorites Page"),
-    );
-  }
-}
-
-class ProfilePage extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text("Profile Page"),
-    );
   }
 }
