@@ -7,6 +7,7 @@ import 'markers.dart'; // Import the markers file
 import 'pages/FavoritesPage.dart';
 import 'pages/ActivityPage.dart';
 import 'pages/ProfilePage.dart';
+
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
 
@@ -135,7 +136,7 @@ class MapPageState extends State<MapPage> {
         return marker.name.toLowerCase().contains(query.toLowerCase());
       }).toList();
       setState(() {
-        searchResults = results;
+        searchResults = results.take(5).toList(); // Limit to 5 results
       });
     }
   }
@@ -258,38 +259,39 @@ class MapPageState extends State<MapPage> {
                         ),
                       ),
                       if (searchResults.isNotEmpty)
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.circular(30),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: searchResults.length,
-                              itemBuilder: (context, index) {
-                                ChargerMarker charger = searchResults[index];
-                                return ListTile(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  title: Text(charger.name),
-                                  onTap: () {
-                                    setState(() {
-                                      selectedMarker = charger.location;
-                                    });
-                                    showBottomSheet(charger.location, charger);
-                                  },
-                                );
-                              },
-                            ),
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: searchResults.length * 60.0, // Adjust the height dynamically
+                          ),
+                          margin: const EdgeInsets.only(top: 5), // Change the top margin to adjust distance
+                          decoration: BoxDecoration(
+                            color: Colors.white, // Same color as the input bar
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: searchResults.length,
+                            itemBuilder: (context, index) {
+                              ChargerMarker charger = searchResults[index];
+                              return ListTile(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                title: Text(charger.name),
+                                onTap: () {
+                                  setState(() {
+                                    selectedMarker = charger.location;
+                                  });
+                                  showBottomSheet(charger.location, charger);
+                                },
+                              );
+                            },
                           ),
                         ),
                     ],
