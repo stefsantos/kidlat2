@@ -25,6 +25,7 @@ class MapPageState extends State<MapPage> {
   LocationData? currentLocation;
   Location location = Location();
   LatLng? selectedMarker;
+  String? selectedMarkerName; // Variable to hold selected marker's name
 
   TextEditingController searchController = TextEditingController();
   List<ChargerMarker> searchResults = [];
@@ -57,7 +58,7 @@ class MapPageState extends State<MapPage> {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "YOUR_GOOGLE_MAPS_API_KEY",
+      "AIzaSyCAaL8ID7Ipzi5pzsNtT3eJC-gchL-F8i0",
       PointLatLng(source.latitude, source.longitude),
       PointLatLng(destination.latitude, destination.longitude),
     );
@@ -108,6 +109,10 @@ class MapPageState extends State<MapPage> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
+                      setState(() {
+                        selectedMarker = marker;
+                        selectedMarkerName = charger.name; // Set selected marker name
+                      });
                       getPolyPoints(
                         LatLng(currentLocation!.latitude!,
                             currentLocation!.longitude!),
@@ -136,7 +141,7 @@ class MapPageState extends State<MapPage> {
         return marker.name.toLowerCase().contains(query.toLowerCase());
       }).toList();
       setState(() {
-        searchResults = results.take(5).toList(); // Limit to 5 results
+        searchResults = results; // No limit on the number of results
       });
     }
   }
@@ -145,6 +150,13 @@ class MapPageState extends State<MapPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<void> _centerMapOnMarker(LatLng markerLocation) async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(target: markerLocation, zoom: 14.5),
+    ));
   }
 
   @override
@@ -218,6 +230,7 @@ class MapPageState extends State<MapPage> {
                       onTap: () {
                         setState(() {
                           selectedMarker = charger.location;
+                          searchResults.clear(); // Hide the suggestions list
                         });
                         showBottomSheet(charger.location, charger);
                       },
@@ -260,12 +273,10 @@ class MapPageState extends State<MapPage> {
                       ),
                       if (searchResults.isNotEmpty)
                         Container(
-                          constraints: BoxConstraints(
-                            maxHeight: searchResults.length * 60.0, // Adjust the height dynamically
-                          ),
-                          margin: const EdgeInsets.only(top: 5), // Change the top margin to adjust distance
+                          height: 5 * 60.0, // Set the height to fit 5 suggestions
+                          margin: const EdgeInsets.only(top: 5),
                           decoration: BoxDecoration(
-                            color: Colors.white, // Same color as the input bar
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(30),
                             boxShadow: [
                               BoxShadow(
@@ -276,7 +287,6 @@ class MapPageState extends State<MapPage> {
                             ],
                           ),
                           child: ListView.builder(
-                            shrinkWrap: true,
                             itemCount: searchResults.length,
                             itemBuilder: (context, index) {
                               ChargerMarker charger = searchResults[index];
@@ -287,11 +297,41 @@ class MapPageState extends State<MapPage> {
                                 onTap: () {
                                   setState(() {
                                     selectedMarker = charger.location;
+                                    searchResults.clear(); // Hide the suggestions list
                                   });
                                   showBottomSheet(charger.location, charger);
                                 },
                               );
                             },
+                          ),
+                        ),
+                      if (selectedMarkerName != null)
+                        GestureDetector(
+                          onTap: () {
+                            _centerMapOnMarker(selectedMarker!);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            margin: EdgeInsets.only(top: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              'Going to: $selectedMarkerName',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ),
                     ],
