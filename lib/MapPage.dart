@@ -71,7 +71,7 @@ class MapPageState extends State<MapPage> {
         ),
       );
       setState(() {
-        selectedMarker = null; // Hide the button after generating the polyline
+        selectedMarker = destination; // Set the selected marker location
       });
     }
   }
@@ -308,7 +308,15 @@ class MapPageState extends State<MapPage> {
                       if (selectedMarkerName != null)
                         GestureDetector(
                           onTap: () {
-                            _centerMapOnMarker(selectedMarker!);
+                            if (selectedMarker != null) {
+                              _centerMapOnMarker(selectedMarker!);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('No marker selected'),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.all(16),
