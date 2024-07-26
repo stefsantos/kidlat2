@@ -10,8 +10,11 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        // title: const Text('Sign Up'),
         leading: IconButton(
           color: Colors.black,
           icon: const Icon(Icons.arrow_back),
@@ -19,6 +22,16 @@ class SignUpPage extends StatelessWidget {
             Navigator.pushReplacementNamed(context, '/');
           },
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0), 
+            child: Image.asset(
+              "assets/3.png",
+              height: 150.0, 
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -26,21 +39,21 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 0),
               Align(
-                alignment: Alignment.topRight,
+                alignment: Alignment.topLeft,
                 child: Container(
-                  width: 73,
-                  height: 61,
+                  width: 300,
+                  height: 240,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage("https://via.placeholder.com/73x61"),
+                      image: AssetImage("assets/locationsearch.png"),
                       fit: BoxFit.fill,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,11 +63,10 @@ class SignUpPage extends StatelessWidget {
                       color: Color(0xFF303E44),
                       fontSize: 40,
                       fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: -0.30,
                     ),
                   ),
-                  SizedBox(height: 8),
                   Text(
                     'Create a new account',
                     style: TextStyle(
@@ -67,11 +79,11 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
               _buildInputField('Username', 'Enter your username', usernameController),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               _buildInputField('Email', 'Enter your email', emailController),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               _buildInputField('Name', 'Enter your name', nameController),
               SizedBox(height: 20),
               Align(
@@ -135,7 +147,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
             ],
           ),
         ),

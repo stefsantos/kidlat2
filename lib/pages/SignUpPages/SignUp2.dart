@@ -22,8 +22,11 @@ class _SignUpPage2State extends State<SignUpPage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        // title: const Text('Sign Up'),
         leading: IconButton(
           color: Colors.black,
           icon: const Icon(Icons.arrow_back),
@@ -31,6 +34,16 @@ class _SignUpPage2State extends State<SignUpPage2> {
             Navigator.pushReplacementNamed(context, '/');
           },
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0), 
+            child: Image.asset(
+              "assets/3.png",
+              height: 150.0, 
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -38,20 +51,6 @@ class _SignUpPage2State extends State<SignUpPage2> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 73,
-                  height: 61,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage("https://via.placeholder.com/73x61"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
                       color: Color(0xFF303E44),
                       fontSize: 40,
                       fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: -0.30,
                     ),
                   ),
@@ -285,6 +284,7 @@ class GenderDropdown extends StatelessWidget {
       isExpanded: true,
       underline: SizedBox(),
       borderRadius: BorderRadius.circular(12),
+      dropdownColor: Colors.white,
       items: <String>['Male', 'Female'].map((String value) {
         return DropdownMenuItem<String>(
           value: value,

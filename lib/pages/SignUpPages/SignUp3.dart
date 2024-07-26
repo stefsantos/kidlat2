@@ -6,45 +6,55 @@ class SignUpPage3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
+          color: Colors.black,
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/');
           },
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Image.asset(
+              "assets/3.png",
+              height: 150.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+              width: double.infinity, // Ensure the image container takes full width
+              height: 500, // Adjust height as needed
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/roadtrip.png"),
+                  fit: BoxFit.cover, // Ensure proper scaling
                 ),
               ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter, // Align content to the top
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start, // Align items at the start (top)
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      width: 73,
-                      height: 61,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage("https://via.placeholder.com/73x61"),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: 150), // Adjust this value to move the content higher
                   Container(
                     width: 322,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     child: Column(
                       children: [
                         Text(
@@ -53,7 +63,7 @@ class SignUpPage3 extends StatelessWidget {
                             color: Color(0xFF1E1E1E),
                             fontSize: 20,
                             fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                             letterSpacing: -0.50,
                           ),
                         ),
@@ -72,19 +82,22 @@ class SignUpPage3 extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 30),
                   TextButton(
                     onPressed: () {
-                        print("Proceed to Login Button tapped!");
-                        Navigator.push(context,
+                      print("Proceed to Login Button tapped!");
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => LoginPage()),
                       );
                     },
-                    child: Text('Proceed to Login',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    child: Text(
+                      'Proceed to Login',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     style: TextButton.styleFrom(
                       elevation: 2,
@@ -96,24 +109,18 @@ class SignUpPage3 extends StatelessWidget {
                         side: BorderSide(
                           color: Colors.grey.shade600.withOpacity(0.2),
                           width: 1.5,
-                        )
+                        ),
                       ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: 390,
-                      height: 41,
-                      padding: EdgeInsets.symmetric(horizontal: 128),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
+
+
