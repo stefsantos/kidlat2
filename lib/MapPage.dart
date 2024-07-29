@@ -4,6 +4,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'markers.dart'; // Import the markers file
+import 'favorites.dart'; // Import the FavoritesManager
 import 'pages/FavoritesPage.dart';
 import 'pages/ActivityPage.dart';
 import 'pages/ProfilePage.dart';
@@ -97,12 +98,12 @@ void showBottomSheet(LatLng marker, ChargerMarker charger) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: ClipRRect(
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
                         child: Image.network(
                           charger.imageUrl,
@@ -111,70 +112,87 @@ void showBottomSheet(LatLng marker, ChargerMarker charger) {
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(
-                                charger.name,
-                                style: TextStyle(
-                                  fontFamily: 'Poppins', 
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                  height: 1.2,
-                                ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      charger.name,
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins', 
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        height: 1.2,
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.favorite_border,
+                                      color: Color.fromRGBO(254, 182, 44, 1.0),
+                                      size: 25,
+                                    ),
+                                    onPressed: () {
+                                      FavoritesManager().addFavorite(FavoriteItem(
+                                        name: charger.name,
+                                        imageUrl: charger.imageUrl,
+                                        location: marker,
+                                      ));
+                                    },
+                                  ),
+                                ],
                               ),
-                              subtitle: Text(
+                              Text(
                                 'Location: ${charger.location.latitude}, ${charger.location.longitude}',
                                 style: TextStyle(
                                   fontFamily: 'Poppins', 
-                                  fontSize: 12.0,
+                                  fontSize: 10.0,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  selectedMarker = marker;
-                                  selectedMarkerName = charger.name; // Set selected marker name
-                                });
-                                getPolyPoints(
-                                  LatLng(currentLocation!.latitude!,
-                                      currentLocation!.longitude!),
-                                  marker,
-                                );
-                                Navigator.pop(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromRGBO(254, 182, 44, 1.0),
-                                padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    selectedMarker = marker;
+                                    selectedMarkerName = charger.name; // Set selected marker name
+                                  });
+                                  getPolyPoints(
+                                    LatLng(currentLocation!.latitude!,
+                                        currentLocation!.longitude!),
+                                    marker,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color.fromRGBO(254, 182, 44, 1.0),
+                                  padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                child: const Text(
+                                  "Get Directions",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Poppins', 
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0, 
+                                  ),
                                 ),
                               ),
-                              child: const Text(
-                                "Get Directions",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Poppins', 
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16.0, 
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 10), // Spacing below the Row
               ],
             ),
           );
