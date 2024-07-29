@@ -82,54 +82,108 @@ class MapPageState extends State<MapPage> {
     super.initState();
   }
 
-  void showBottomSheet(LatLng marker, ChargerMarker charger) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return DraggableScrollableSheet(
-          initialChildSize: 0.4,
-          maxChildSize: 0.6,
-          minChildSize: 0.2,
-          expand: false,
-          builder: (BuildContext context, ScrollController scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(charger.name),
-                    subtitle: Text(
-                        'Location: ${charger.location.latitude}, ${charger.location.longitude}'),
-                  ),
-                  const SizedBox(height: 10),
-                  Image.network(
-                    charger.imageUrl,
-                    height: 150,
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedMarker = marker;
-                        selectedMarkerName = charger.name; // Set selected marker name
-                      });
-                      getPolyPoints(
-                        LatLng(currentLocation!.latitude!,
-                            currentLocation!.longitude!),
-                        marker,
-                      );
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Get Directions"),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
+void showBottomSheet(LatLng marker, ChargerMarker charger) {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return DraggableScrollableSheet(
+        initialChildSize: 0.4,
+        maxChildSize: 0.6,
+        minChildSize: 0.2,
+        expand: false,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.network(
+                          charger.imageUrl,
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(
+                                charger.name,
+                                style: TextStyle(
+                                  fontFamily: 'Poppins', 
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                  height: 1.2,
+                                ),
+                              ),
+                              subtitle: Text(
+                                'Location: ${charger.location.latitude}, ${charger.location.longitude}',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins', 
+                                  fontSize: 12.0,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedMarker = marker;
+                                  selectedMarkerName = charger.name; // Set selected marker name
+                                });
+                                getPolyPoints(
+                                  LatLng(currentLocation!.latitude!,
+                                      currentLocation!.longitude!),
+                                  marker,
+                                );
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromRGBO(254, 182, 44, 1.0),
+                                padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              child: const Text(
+                                "Get Directions",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins', 
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.0, 
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10), // Spacing below the Row
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
+}
+
 
   void searchMarkers(String query) {
     if (query.isEmpty) {
