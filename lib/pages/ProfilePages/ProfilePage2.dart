@@ -6,16 +6,366 @@ class ProfilePage2 extends StatefulWidget {
 }
 
 class _ProfilePage2State extends State<ProfilePage2> {
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page 2'),
+        title: Text('My Account'),
       ),
-      body: Center(
-        child: Text('This is Profile Page 2'),
-      ),
+      body: 
+      Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Text(
+                    'My Account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: Container(
+                    width: 72,
+                    height: 72,
+                    decoration: ShapeDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage("https://via.placeholder.com/72x72"),
+                        fit: BoxFit.fill,
+                      ),
+                      shape: OvalBorder(),
+                    ),
+                  ),
+                ),
+                Text(
+                  'Alisha Chua',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF181D27),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    height: 1.5,
+                  ),
+                ),
+                Text(
+                  '@ilovemyev',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFFABABAB),
+                    fontSize: 13,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                    height: 1.5,
+                  ),
+                ),
+                SizedBox(height: 5),
+                _buildInputField('Username', 'Enter your username', usernameController),  
+                SizedBox(height: 10),
+                _buildInputField('Name', 'Enter Name', nameController),
+                SizedBox(height: 10),
+                _buildInputField('Email', 'Enter Email', emailController),
+                SizedBox(height: 10),
+                _buildInputField('Mobile Number', '+63 | 9178655903', mobileController),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Gender',
+                      style: TextStyle(
+                        color: Color(0xFF2A2A2A),
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.50,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Container(
+                    width: double.infinity,
+                    height: 52.17,
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: 2,
+                          color: Color(0xFFE1E1E1),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: GenderDropdown(
+                        selectedGender: selectedGender,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedGender = newValue;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Password',
+                            style: TextStyle(
+                              color: Color(0xFF2A2A2A),
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                              height: 1.5,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            width: 229,
+                            height: 38.71,
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 2,
+                                  color: Color(0xFFE1E1E1),
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: TextField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 15, bottom: 10), // Adjust according to your layout
+                                border: InputBorder.none,
+                                hintText: 'Enter New Password',
+                              ),
+                              style: TextStyle(
+                                color: Color(0xFF2A2A2A),
+                                fontSize: 13,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 30),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32.0), // Adjust the top padding value as needed
+                        child: Container(
+                          width: 115,
+                          height: 38.71,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFFFEB62C),
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                width: 0.50,
+                                color: Colors.black.withOpacity(0.20),
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            shadows: [
+                              BoxShadow(
+                                color: Color(0x1E000000),
+                                blurRadius: 12,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Change Password',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'SF Pro Text',
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 38),
+                  child: Container(
+                    width: double.infinity,
+                    height: 48.43,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFFFEB62C),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          width: 0.50,
+                          color: Colors.black.withOpacity(0.20),
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x1E000000),
+                          blurRadius: 12,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Update Profile',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontFamily: 'SF Pro Text',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.30,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 38, vertical: 20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 1.15,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFFF5F5F5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      )
+    );
+  }
+
+  Widget _buildInputField(String label, String hintText, TextEditingController controller, {bool obscureText = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: Color(0xFF2A2A2A),
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+              letterSpacing: -0.50,
+            ),
+          ),
+        ),
+        SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25), // Apply horizontal padding
+          child: Container(
+            width: double.infinity, // Set the desired width here
+            child: TextField(
+              controller: controller,
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                  fontSize: 17,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: -0.30,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Color(0xFFE1E1E1),
+                    width: 2,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Color(0xFFFEB62C), // Highlight color when focused
+                    width: 2,
+                  ),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
 
+class GenderDropdown extends StatelessWidget {
+  final String? selectedGender;
+  final ValueChanged<String?>? onChanged;
+
+  GenderDropdown({this.selectedGender, this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: selectedGender,
+      hint: Text('Select your gender'),
+      isExpanded: true,
+      underline: SizedBox(),
+      borderRadius: BorderRadius.circular(12),
+      dropdownColor: Colors.white,
+      items: <String>['Male', 'Female'].map((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: onChanged,
+    );
+  }
+}
