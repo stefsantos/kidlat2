@@ -257,17 +257,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      InkWell(
-                      onTap: () {
-                        // Add your onPress code here
-                        print("My Account pressed");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfilePage2(onBack: () {  },)),
-                        );
-                      },
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 16),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProfilePage2()),
+                            );
+                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -516,3 +514,4 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+

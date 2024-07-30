@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage2 extends StatelessWidget {
-  final VoidCallback onBack;
+class ProfilePage2 extends StatefulWidget {
+  @override
+  _ProfilePage2State createState() => _ProfilePage2State();
+}
 
-  ProfilePage2({required this.onBack});
-
+class _ProfilePage2State extends State<ProfilePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Page 2"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: onBack,
-        ),
+        title: Text('Profile Page 2'),
       ),
       body: Center(
-        child: Text("Welcome to Profile Page 2"),
+        child: Text('This is Profile Page 2'),
       ),
     );
   }
 }
+
