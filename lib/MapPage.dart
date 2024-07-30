@@ -7,7 +7,7 @@ import 'markers.dart'; // Import the markers file
 import 'favorites.dart'; // Import the FavoritesManager
 import 'pages/FavoritesPage.dart';
 import 'pages/ActivityPage.dart';
-import 'pages/ProfilePage.dart';
+import 'pages/ProfilePages/ProfilePage.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);

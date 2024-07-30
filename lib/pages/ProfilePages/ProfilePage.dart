@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kidlat/pages/start_page.dart'; // Ensure this is the correct path
 import 'package:flutter_switch/flutter_switch.dart';
+import 'ProfilePage2.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -256,31 +257,41 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "My Account ",
-                              style: TextStyle(
-                                color: Color(0XFF000000),
-                                fontSize: 13,
-                                fontFamily: 'DM Sans',
-                                fontWeight: FontWeight.w500,
+                      InkWell(
+                      onTap: () {
+                        // Add your onPress code here
+                        print("My Account pressed");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProfilePage2(onBack: () {  },)),
+                        );
+                      },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "My Account ",
+                                style: TextStyle(
+                                  color: Color(0XFF000000),
+                                  fontSize: 13,
+                                  fontFamily: 'DM Sans',
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 2),
-                            Text(
-                              "Make changes to your account",
-                              style: TextStyle(
-                                color: Color(0XFFABABAB),
-                                fontSize: 11,
-                                fontFamily: 'DM Sans',
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
+                              SizedBox(height: 2),
+                              Text(
+                                "Make changes to your account",
+                                style: TextStyle(
+                                  color: Color(0XFFABABAB),
+                                  fontSize: 11,
+                                  fontFamily: 'DM Sans',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
