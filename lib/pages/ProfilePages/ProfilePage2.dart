@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kidlat/pages/ProfilePages/ProfilePage3.dart';
 
 class ProfilePage2 extends StatefulWidget {
   @override
@@ -216,36 +217,47 @@ class _ProfilePage2State extends State<ProfilePage2> {
                 SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 38),
-                  child: Container(
-                    width: double.infinity,
-                    height: 48.43,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFFFEB62C),
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          width: 0.50,
-                          color: Colors.black.withOpacity(0.20),
+                  child: InkWell(
+                    onTap: () {
+                      // Define the action to be taken when the button is pressed
+                      print('update profile button tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProfilePage3()),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(30),
+                    child: Container(
+                      width: double.infinity,
+                      height: 48.43,
+                      decoration: ShapeDecoration(
+                        color: Color(0xFFFEB62C),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 0.50,
+                            color: Colors.black.withOpacity(0.20),
+                          ),
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        borderRadius: BorderRadius.circular(30),
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0x1E000000),
+                            blurRadius: 12,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
                       ),
-                      shadows: [
-                        BoxShadow(
-                          color: Color(0x1E000000),
-                          blurRadius: 12,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Update Profile',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontFamily: 'SF Pro Text',
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: -0.30,
+                      child: Center(
+                        child: Text(
+                          'Update Profile',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontFamily: 'SF Pro Text',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: -0.30,
+                          ),
                         ),
                       ),
                     ),
