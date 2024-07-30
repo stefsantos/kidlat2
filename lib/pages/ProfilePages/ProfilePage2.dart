@@ -36,21 +36,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Text(
-                    'My Account',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 1.5,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 27),
                   child: Container(
                     width: 72,
                     height: 72,
