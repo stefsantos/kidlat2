@@ -14,35 +14,38 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Favorites'),
-      ),
-      body: ListView.builder(
-        itemCount: _favoritesManager.favorites.length,
-        itemBuilder: (context, index) {
-          final item = _favoritesManager.favorites[index];
-          return ListTile(
-            contentPadding: EdgeInsets.all(8.0),
-            leading: Image.network(
-              item.imageUrl,
-              height: 50,
-              width: 50,
-              fit: BoxFit.cover,
-            ),
-            title: Text(item.name),
-            subtitle: Text('Location: ${item.location.latitude}, ${item.location.longitude}'),
-            trailing: IconButton(
-              icon: Icon(Icons.delete, color: Colors.grey),
-              onPressed: () {
-                setState(() {
-                  _favoritesManager.removeFavorite(item);
-                });
+      body: _favoritesManager.favorites.isEmpty
+          ? Center(
+              child: Text(
+                'No Favorites',
+                style: TextStyle(fontSize: 20),
+              ),
+            )
+          : ListView.builder(
+              itemCount: _favoritesManager.favorites.length,
+              itemBuilder: (context, index) {
+                final item = _favoritesManager.favorites[index];
+                return ListTile(
+                  contentPadding: EdgeInsets.all(8.0),
+                  leading: Image.network(
+                    item.imageUrl,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(item.name),
+                  subtitle: Text('Location: ${item.location.latitude}, ${item.location.longitude}'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.grey),
+                    onPressed: () {
+                      setState(() {
+                        _favoritesManager.removeFavorite(item);
+                      });
+                    },
+                  ),
+                );
               },
             ),
-          );
-        },
-      ),
     );
   }
 }
-
