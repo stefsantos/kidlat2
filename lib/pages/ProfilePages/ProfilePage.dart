@@ -225,42 +225,47 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 4),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        constraints: BoxConstraints(
-                          minHeight: 40,
-                          minWidth: 40,
-                        ),
-                        padding: EdgeInsets.all(0),
-                        icon: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Color(0X0C000000),
-                            borderRadius: BorderRadius.circular(
-                              20,
-                            ),
-                          ),
-                          padding: EdgeInsets.all(10),
-                          child: SvgPicture.asset(
-                            "assets/img_group_12334.svg",
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16),
-                        child: GestureDetector(
-                          onTap: () {
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage2()),
+                    );
+                  },
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => ProfilePage2()),
                             );
                           },
+                          constraints: BoxConstraints(
+                            minHeight: 40,
+                            minWidth: 40,
+                          ),
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0X0C000000),
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ),
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: SvgPicture.asset(
+                              "assets/img_group_12334.svg",
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -286,104 +291,107 @@ class _ProfilePageState extends State<ProfilePage> {
                             ],
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 16),
-                        child: SizedBox(
-                          height: 14,
-                          width: 14,
-                          child: SvgPicture.asset(
-                            "assets/images/img_group_12135.svg",
+                        Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: SizedBox(
+                            height: 14,
+                            width: 14,
+                            child: SvgPicture.asset(
+                              "assets/images/img_group_12135.svg",
+                            ),
                           ),
                         ),
-                      ),
-                      Spacer(),
-                      Padding(
-                        padding: EdgeInsets.only(right: 0),
-                        child: SizedBox(
-                          height: 10,
-                          width: 6,
-                          child: SvgPicture.asset(
-                            "assets/images/img_month_chevron.svg",
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(right: 0),
+                          child: SizedBox(
+                            height: 10,
+                            width: 6,
+                            child: SvgPicture.asset(
+                              "assets/images/img_month_chevron.svg",
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 14),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        constraints: BoxConstraints(
-                          minHeight: 40,
-                          minWidth: 40,
-                        ),
-                        padding: EdgeInsets.all(0),
-                        icon: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Color(0X0C000000),
-                            borderRadius: BorderRadius.circular(
-                              20,
-                            ),
+                GestureDetector(
+                  onTap: () {},
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          constraints: BoxConstraints(
+                            minHeight: 40,
+                            minWidth: 40,
                           ),
-                          padding: EdgeInsets.all(10),
-                          child: SvgPicture.asset(
-                            "assets/img_group_12334_40x40.svg",
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Face ID / Touch ID",
-                              style: TextStyle(
-                                color: Color(0XFF000000),
-                                fontSize: 13,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0X0C000000),
+                              borderRadius: BorderRadius.circular(
+                                20,
                               ),
                             ),
-                            SizedBox(height: 2),
-                            Text(
-                              "Manage your device security",
-                              style: TextStyle(
-                                color: Color(0XFFABABAB),
-                                fontSize: 11,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400,
-                              ),
-                            )
-                          ],
+                            padding: EdgeInsets.all(10),
+                            child: SvgPicture.asset(
+                              "assets/img_group_12334_40x40.svg",
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 16),
-                      FlutterSwitch(
-                        value: isSelectedSwitch,
-                        height: 30,
-                        width: 50,
-                        toggleSize: 20,
-                        borderRadius: 14,
-                        activeColor: Color(0XFFE3E4E8),
-                        activeToggleColor: Color(0X19000000),
-                        inactiveColor: Color(0X19000000),
-                        inactiveToggleColor: Color(0X19000000),
-                        onToggle: (value) {
-                          setState(() {
-                            isSelectedSwitch = value;
-                          });
-                        },
-                      )
-                    ],
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Face ID / Touch ID",
+                                style: TextStyle(
+                                  color: Color(0XFF000000),
+                                  fontSize: 13,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                "Manage your device security",
+                                style: TextStyle(
+                                  color: Color(0XFFABABAB),
+                                  fontSize: 11,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        FlutterSwitch(
+                          value: isSelectedSwitch,
+                          height: 30,
+                          width: 50,
+                          toggleSize: 20,
+                          borderRadius: 14,
+                          activeColor: Color(0XFFE3E4E8),
+                          activeToggleColor: Color(0X19000000),
+                          inactiveColor: Color(0X19000000),
+                          inactiveToggleColor: Color(0X19000000),
+                          onToggle: (value) {
+                            setState(() {
+                              isSelectedSwitch = value;
+                            });
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 14),
@@ -442,17 +450,12 @@ class _ProfilePageState extends State<ProfilePage> {
     required String securityText,
     bool isLogout = false,
   }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          onPressed: isLogout ? () => _logout(context) : () {},
-          constraints: BoxConstraints(
-            minHeight: 40,
-            minWidth: 40,
-          ),
-          padding: EdgeInsets.all(0),
-          icon: Container(
+    return GestureDetector(
+      onTap: isLogout ? () => _logout(context) : () {},
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
             width: 40,
             height: 40,
             decoration: BoxDecoration(
@@ -466,47 +469,46 @@ class _ProfilePageState extends State<ProfilePage> {
               "assets/images/img_group_12334_2.svg",
             ),
           ),
-        ),
-        SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                logoutText,
-                style: TextStyle(
-                  color: Color(0XFF555555),
-                  fontSize: 13,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w500,
+          SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  logoutText,
+                  style: TextStyle(
+                    color: Color(0XFF555555),
+                    fontSize: 13,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: 2),
-              Text(
-                securityText,
-                style: TextStyle(
-                  color: Color(0XFFABABAB),
-                  fontSize: 11,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                ),
-              )
-            ],
-          ),
-        ),
-        SizedBox(width: 16),
-        Padding(
-          padding: EdgeInsets.only(right: 0),
-          child: SizedBox(
-            height: 10,
-            width: 6,
-            child: SvgPicture.asset(
-              "assets/images/img_month_chevron.svg",
+                SizedBox(height: 2),
+                Text(
+                  securityText,
+                  style: TextStyle(
+                    color: Color(0XFFABABAB),
+                    fontSize: 11,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                  ),
+                )
+              ],
             ),
           ),
-        )
-      ],
+          SizedBox(width: 16),
+          Padding(
+            padding: EdgeInsets.only(right: 0),
+            child: SizedBox(
+              height: 10,
+              width: 6,
+              child: SvgPicture.asset(
+                "assets/images/img_month_chevron.svg",
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
-

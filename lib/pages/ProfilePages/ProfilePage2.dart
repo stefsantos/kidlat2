@@ -27,7 +27,6 @@ class _ProfilePage2State extends State<ProfilePage2> {
         width: double.infinity,
         height: double.infinity,
         decoration: ShapeDecoration(
-          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

@@ -22,7 +22,6 @@ class _ProfilePage3State extends State<ProfilePage3> {
             bottom: 357.46,
           ),
           decoration: ShapeDecoration(
-            color: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
