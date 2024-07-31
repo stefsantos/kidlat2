@@ -50,7 +50,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                   ),
                 ),
                 Text(
-                  'Alisha Chua',
+                  'Test',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF181D27),

@@ -165,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Alisha Chua",
+                              "Test",
                               style: TextStyle(
                                 color: Color(0XFF000000),
                                 fontSize: 14,
@@ -425,6 +425,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     securityText: "Further secure your account for safety",
                     iconAsset: "assets/Logout.svg",
                     isLogout: true,
+                    onTap: () => _logout(context),
                   ),
                 )
               ],
