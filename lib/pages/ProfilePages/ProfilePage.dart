@@ -25,7 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0XFFFFFFFF),
         body: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -114,11 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   borderRadius: BorderRadius.circular(
                                     28,
                                   ),
-                                  child: Image.asset(
-                                    "assets/images/img_ellipse_643.png",
-                                    height: 56,
-                                    width: double.maxFinite,
-                                  ),
+                                  
                                 ),
                               ),
                             ),
@@ -144,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         28,
                                       ),
                                       child: Image.asset(
-                                        "assets/images/img_user_image.png",
+                                        "assets/img_user_image.png",
                                         height: 56,
                                         width: double.maxFinite,
                                       ),
@@ -253,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           padding: EdgeInsets.all(10),
                           child: SvgPicture.asset(
-                            "assets/images/img_group_12334.svg",
+                            "assets/img_group_12334.svg",
                           ),
                         ),
                       ),
@@ -340,7 +335,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           padding: EdgeInsets.all(10),
                           child: SvgPicture.asset(
-                            "assets/images/img_group_12334_40x40.svg",
+                            "assets/img_group_12334_40x40.svg",
                           ),
                         ),
                       ),
@@ -396,8 +391,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: double.maxFinite,
                   child: _buildLogoutSection(
                     context,
-                    logoutText: "Two-Factor Authentication",
-                    securityText: "Further secure your account for safety",
+                    logoutText: "Suggest A Marker",
+                    securityText: "Request a marker to be added",
                   ),
                 ),
                 SizedBox(height: 14),

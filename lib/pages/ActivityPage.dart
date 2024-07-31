@@ -12,7 +12,6 @@ class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: _selectedMarkersManager.selectedMarkers.isEmpty
           ? Center(
               child: Text(

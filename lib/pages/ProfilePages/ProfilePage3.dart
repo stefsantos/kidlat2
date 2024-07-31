@@ -11,9 +11,6 @@ class _ProfilePage3State extends State<ProfilePage3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile Page 3'),
-      ),
       body: Center(
         child: Container(
           width: 393,

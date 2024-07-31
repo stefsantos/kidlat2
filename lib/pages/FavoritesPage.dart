@@ -13,7 +13,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: _favoritesManager.favorites.isEmpty
           ? Center(
               child: Text(
