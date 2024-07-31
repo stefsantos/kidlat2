@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kidlat/pages/start_page.dart'; // Ensure this is the correct path
 import 'package:flutter_switch/flutter_switch.dart';
 import 'ProfilePage2.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -19,6 +20,14 @@ class _ProfilePageState extends State<ProfilePage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => StartPage()),
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -113,7 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   borderRadius: BorderRadius.circular(
                                     28,
                                   ),
-                                  
                                 ),
                               ),
                             ),
@@ -241,7 +249,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ProfilePage2()),
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage2()),
                             );
                           },
                           constraints: BoxConstraints(
@@ -401,6 +410,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     logoutText: "Suggest A Marker",
                     securityText: "Request a marker to be added",
+                    onTap: () {
+                      _launchURL('https://forms.gle/souUV1u2jFgGHwhK8');
+                    },
                   ),
                 ),
                 SizedBox(height: 14),
@@ -449,9 +461,10 @@ class _ProfilePageState extends State<ProfilePage> {
     required String logoutText,
     required String securityText,
     bool isLogout = false,
+    VoidCallback? onTap,
   }) {
     return GestureDetector(
-      onTap: isLogout ? () => _logout(context) : () {},
+      onTap: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
