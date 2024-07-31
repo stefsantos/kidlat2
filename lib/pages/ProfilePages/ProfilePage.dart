@@ -34,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SizedBox(
           width: double.maxFinite,
           child: Column(

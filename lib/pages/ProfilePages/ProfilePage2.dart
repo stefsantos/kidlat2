@@ -7,7 +7,6 @@ class ProfilePage2 extends StatefulWidget {
 }
 
 class _ProfilePage2State extends State<ProfilePage2> {
-
   TextEditingController usernameController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -19,11 +18,11 @@ class _ProfilePage2State extends State<ProfilePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('My Account'),
       ),
-      body: 
-      Container(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: ShapeDecoration(
@@ -42,7 +41,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                     height: 72,
                     decoration: ShapeDecoration(
                       image: DecorationImage(
-                        image: NetworkImage("https://via.placeholder.com/72x72"),
+                        image: AssetImage('assets/img_user_image.png'),
                         fit: BoxFit.fill,
                       ),
                       shape: OvalBorder(),
@@ -72,7 +71,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
                   ),
                 ),
                 SizedBox(height: 5),
-                _buildInputField('Username', 'Enter your username', usernameController),  
+                _buildInputField('Username', 'Enter your username', usernameController),
                 SizedBox(height: 10),
                 _buildInputField('Name', 'Enter Name', nameController),
                 SizedBox(height: 10),
@@ -97,7 +96,8 @@ class _ProfilePage2State extends State<ProfilePage2> {
                   ),
                 ),
                 SizedBox(height: 8),
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     width: double.infinity,
                     height: 52.17,
@@ -279,7 +279,7 @@ class _ProfilePage2State extends State<ProfilePage2> {
             ),
           ),
         ),
-      )
+      ),
     );
   }
 

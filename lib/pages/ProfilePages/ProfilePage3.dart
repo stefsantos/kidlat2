@@ -11,10 +11,11 @@ class _ProfilePage3State extends State<ProfilePage3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           width: 393,
-          height: 852,
+          height: 1000,
           padding: const EdgeInsets.only(
             top: 58,
             left: 49,
@@ -26,32 +27,28 @@ class _ProfilePage3State extends State<ProfilePage3> {
               borderRadius: BorderRadius.circular(30),
             ),
           ),
-          child: SingleChildScrollView( // Wrap with SingleChildScrollView
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: 103,
-                  height: 1,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/3.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 60),
                 Container(
-                  width: 102,
-                  height: 102,
+                  width: 50,
+                  height: 50,
                   decoration: ShapeDecoration(
                     image: DecorationImage(
-                      image: NetworkImage("assets/img_user_image.png"),
+                      image: AssetImage("assets/Kidlat Logo-3.png"),
                       fit: BoxFit.fill,
                     ),
                     shape: OvalBorder(),
                   ),
+                ),
+                const SizedBox(height: 80),
+                Image.asset(
+                  'assets/img_user_image.png', 
+                  width: 100, 
+                  height: 100, 
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -104,7 +101,7 @@ class _ProfilePage3State extends State<ProfilePage3> {
               ],
             ),
           ),
-        )
+        ),
       ),
     );
   }
