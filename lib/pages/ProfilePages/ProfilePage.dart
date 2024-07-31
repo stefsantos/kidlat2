@@ -410,6 +410,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     logoutText: "Suggest A Marker",
                     securityText: "Request a marker to be added",
+                    iconAsset: "assets/suggestamarker.svg",
                     onTap: () {
                       _launchURL('https://forms.gle/souUV1u2jFgGHwhK8');
                     },
@@ -422,6 +423,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     logoutText: "Log out",
                     securityText: "Further secure your account for safety",
+                    iconAsset: "assets/Logout.svg",
                     isLogout: true,
                   ),
                 )
@@ -460,6 +462,7 @@ class _ProfilePageState extends State<ProfilePage> {
     BuildContext context, {
     required String logoutText,
     required String securityText,
+    required String iconAsset,
     bool isLogout = false,
     VoidCallback? onTap,
   }) {
@@ -478,9 +481,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             padding: EdgeInsets.all(10),
-            child: SvgPicture.asset(
-              "assets/images/img_group_12334_2.svg",
-            ),
+            child: SvgPicture.asset(iconAsset),
           ),
           SizedBox(width: 16),
           Expanded(
