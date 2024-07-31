@@ -173,11 +173,11 @@ class _ProfilePage2State extends State<ProfilePage2> {
                           ),
                         ],
                       ),
-                      SizedBox(width: 30),
+                      SizedBox(width: 11),
                       Padding(
                         padding: const EdgeInsets.only(top: 32.0), // Adjust the top padding value as needed
                         child: Container(
-                          width: 115,
+                          width: 100,
                           height: 38.71,
                           decoration: ShapeDecoration(
                             color: Color(0xFFFEB62C),

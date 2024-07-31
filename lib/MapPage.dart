@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'markers.dart'; // Import the markers file
 import 'favorites.dart'; // Import the FavoritesManager
+import 'selected_markers.dart'; // Import the SelectedMarkersManager
 import 'pages/FavoritesPage.dart';
 import 'pages/ActivityPage.dart';
 import 'pages/ProfilePages/ProfilePage.dart';
@@ -32,6 +33,7 @@ class MapPageState extends State<MapPage> {
   List<ChargerMarker> searchResults = [];
 
   int _selectedIndex = 0; // Track the selected index
+  ChargerMarker? selectedCharger; // Variable to hold selected marker's details
 
   void getCurrentLocation() async {
     location.getLocation().then(
@@ -161,13 +163,15 @@ void showBottomSheet(LatLng marker, ChargerMarker charger) {
                                   setState(() {
                                     selectedMarker = marker;
                                     selectedMarkerName = charger.name; // Set selected marker name
+                                    selectedCharger = charger; // Set selected marker details
+                                    SelectedMarkersManager().addMarker(charger); // Add marker to the list
                                   });
                                   getPolyPoints(
                                     LatLng(currentLocation!.latitude!,
                                         currentLocation!.longitude!),
                                     marker,
                                   );
-                                  Navigator.pop(context);
+                                  Navigator.pop(context); 
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromRGBO(254, 182, 44, 1.0),
@@ -201,7 +205,6 @@ void showBottomSheet(LatLng marker, ChargerMarker charger) {
     },
   );
 }
-
 
   void searchMarkers(String query) {
     if (query.isEmpty) {
@@ -238,7 +241,7 @@ void showBottomSheet(LatLng marker, ChargerMarker charger) {
         index: _selectedIndex,
         children: [
           buildMapPage(),
-          ActivityPage(),
+          ActivityPage(), // No need to pass anything here
           FavoritesPage(),
           ProfilePage(),
         ],
